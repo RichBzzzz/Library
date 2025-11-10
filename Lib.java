@@ -28,10 +28,13 @@ class Book{
         this.price = price;
         this.bookStatus = bookStatus;
         this.quantity = quantity;
+
+    public String toString(){
+        return "Book [ID=" + bookID + ", Title='" + title + "', Author='" + author + "', Genre=" + genre + ", Status=" + bookStatus + "]";
     }
 }
 
-class user{
+abstract class user{
     String name;
     String userName;
 }
@@ -51,4 +54,5 @@ class member extends User{
         this.memberID = memberID;
     }
 }
+
 
