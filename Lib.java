@@ -1,3 +1,5 @@
+import java.util.*;
+
 enum Genre {
     HORROR,
     FANTASY,
@@ -9,6 +11,12 @@ enum Genre {
 enum BookStatus {
     AVAILABLE,
     BORROWED
+}
+
+interface InterfaceSearch {
+    List<Book> searchByTitle(String titleQuery);
+    List<Book> searchByGenre(Genre genre);
+    List<Book> searchByAuthor(String authorQuery);
 }
 
 class Book {
@@ -106,6 +114,7 @@ class record{
         this.dueDate = dueDate;
     }
 }
+
 
 
 
