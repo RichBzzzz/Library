@@ -11,14 +11,13 @@ enum BookStatus {
     BORROWED
 }
 
-class Book{
+class Book {
     String bookID;
     String title;
     String author;
     Genre genre;
-    double price;
     BookStatus bookStatus;
-    int quantity
+    int quantity;
 
     public Book(String bookID, String title, String author, Genre genre, BookStatus bookStatus, int quantity)  {
         this.bookID = bookID;
@@ -27,7 +26,8 @@ class Book{
         this.genre = genre;
         this.bookStatus = bookStatus;
         this.quantity = quantity;
-
+    }
+    
     public String toString(){
         return "Book [ID = " + bookID + ", Title = '" + title + "', Author = '" + author + "', Genre = " + genre + ", Status = " + bookStatus + ", Quantity = " + quantity + "]";
     }
@@ -36,6 +36,11 @@ class Book{
 abstract class user{
     String name;
     String userName;
+
+    public user(String name, String userName){
+        this.name = name;
+        this.userName = userName;
+    }
 }
 
 class librarian extends user{
@@ -91,16 +96,17 @@ class record{
     String librarianID;
     String bookID;
     String rentDate;
-    Stirng dueDate;
+    String dueDate;
     public record(String recordID, String memberID, String librarianID, String bookID, String rentDate, String dueDate){
         this.recordID = recordID;
         this.memberID = memberID;
-        this.liibrarianID = librarianID;
+        this.librarianID = librarianID;
         this.bookID = bookID;
         this.rentDate = rentDate;
         this.dueDate = dueDate;
     }
 }
+
 
 
 
