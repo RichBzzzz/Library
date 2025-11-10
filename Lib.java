@@ -20,12 +20,11 @@ class Book{
     BookStatus bookStatus;
     int quantity
 
-    public Book(String bookID, String title, String author, Genre genre, double price, BookStatus bookStatus, int quantity)  {
+    public Book(String bookID, String title, String author, Genre genre, BookStatus bookStatus, int quantity)  {
         this.bookID = bookID;
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.price = price;
         this.bookStatus = bookStatus;
         this.quantity = quantity;
 
@@ -102,6 +101,7 @@ class record{
         this.dueDate = dueDate;
     }
 }
+
 
 
 
