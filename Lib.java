@@ -30,7 +30,7 @@ class Book{
         this.quantity = quantity;
 
     public String toString(){
-        return "Book [ID=" + bookID + ", Title='" + title + "', Author='" + author + "', Genre=" + genre + ", Status=" + bookStatus + "]";
+        return "Book [ID = " + bookID + ", Title = '" + title + "', Author = '" + author + "', Genre = " + genre + ", Status = " + bookStatus + ", Quantity = " + quantity + "]";
     }
 }
 
@@ -54,5 +54,6 @@ class member extends User{
         this.memberID = memberID;
     }
 }
+
 
 
