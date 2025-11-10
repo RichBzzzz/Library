@@ -47,11 +47,59 @@ class librarian extends user{
     }   
 }
 
-class member extends User{
+class member extends user{
     String memberID;
     public member(String name, String userName, String memberID){
         super(name, userName);
         this.memberID = memberID;
+    }
+}
+
+class bill{
+    String billID;
+    String date;
+    String memberID;
+    String librarianID;
+    double amount;
+    public bill(String billID, String date, String memberID, String librarianID, double amount){
+        this.billID = billID;
+        this.date = date;
+        this.memberID = memberID;
+        this.librarianID = librarianID;
+        this.amount = amount;
+    }
+}
+
+class readingList{
+    String name;
+    String memberID;
+    String bookID;
+    String readDate;
+    String progress;
+    public readingList(String name, String memberID, String bookID, String readDate, String progress){
+        this.name = name;
+        this.memberID = memberID;
+        this.bookID = bookID;
+        this.readDate = readDate;
+        this.progress = progress;
+            
+    }
+}
+
+class record{
+    String recordID;
+    String memberID;
+    String librarianID;
+    String bookID;
+    String rentDate;
+    Stirng dueDate;
+    public record(String recordID, String memberID, String librarianID, String bookID, String rentDate, String dueDate){
+        this.recordID = recordID;
+        this.memberID = memberID;
+        this.liibrarianID = librarianID;
+        this.bookID = bookID;
+        this.rentDate = rentDate;
+        this.dueDate = dueDate;
     }
 }
 
