@@ -46,7 +46,7 @@ abstract class User{
     String userName;
     String password;
 
-    public user(String name, String userName, String password){
+    public User(String name, String userName, String password){
         this.name = name;
         this.userName = userName;
         this.password = password;
@@ -55,8 +55,6 @@ abstract class User{
     public boolean checkPassword(String attempt) { // Checks for password
         return this.password.equals(attempt);
     }
-
-    public abstract void displayMenu(LibrarySystem system);
 }
 
 class librarian extends User{
@@ -125,6 +123,7 @@ class History{
         this.dueDate = dueDate;
     }
 }
+
 
 
 
