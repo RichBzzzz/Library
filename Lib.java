@@ -38,7 +38,7 @@ class user{
 
 class librarian extends user{
     String librarianID;
-    public librararian(String name, String userName, String librarianID){
+    public librarian(String name, String userName, String librarianID){
         super(name, userName);
         this.librarianID = librarianID;
     }   
@@ -51,3 +51,4 @@ class member extends User{
         this.memberID = memberID;
     }
 }
+
