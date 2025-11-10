@@ -41,28 +41,36 @@ class Book {
     }
 }
 
-abstract class user{
+abstract class User{
     String name;
     String userName;
+    String password;
 
-    public user(String name, String userName){
+    public user(String name, String userName, String password){
         this.name = name;
         this.userName = userName;
+        this.password = password;
     }
+
+    public boolean checkPassword(String attempt) { // Checks for password
+        return this.password.equals(attempt);
+    }
+
+    public abstract void displayMenu(LibrarySystem system);
 }
 
-class librarian extends user{
+class librarian extends User{
     String librarianID;
-    public librarian(String name, String userName, String librarianID){
-        super(name, userName);
+    public librarian(String name, String userName, String password, String librarianID){
+        super(name, userName, password);
         this.librarianID = librarianID;
     }   
 }
 
-class member extends user{
+class member extends User{
     String memberID;
-    public member(String name, String userName, String memberID){
-        super(name, userName);
+    public member(String name, String userName, String password, String memberID){
+        super(name, userName, password);
         this.memberID = memberID;
     }
 }
@@ -73,6 +81,7 @@ class bill{
     String memberID;
     String librarianID;
     double amount;
+    
     public bill(String billID, String date, String memberID, String librarianID, double amount){
         this.billID = billID;
         this.date = date;
@@ -88,6 +97,7 @@ class readingList{
     String bookID;
     String readDate;
     String progress;
+    
     public readingList(String name, String memberID, String bookID, String readDate, String progress){
         this.name = name;
         this.memberID = memberID;
@@ -98,14 +108,15 @@ class readingList{
     }
 }
 
-class record{
+class History{
     String recordID;
     String memberID;
     String librarianID;
     String bookID;
     String rentDate;
     String dueDate;
-    public record(String recordID, String memberID, String librarianID, String bookID, String rentDate, String dueDate){
+    
+    public History(String recordID, String memberID, String librarianID, String bookID, String rentDate, String dueDate){
         this.recordID = recordID;
         this.memberID = memberID;
         this.librarianID = librarianID;
@@ -114,6 +125,7 @@ class record{
         this.dueDate = dueDate;
     }
 }
+
 
 
 
