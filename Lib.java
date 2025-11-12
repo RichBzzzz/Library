@@ -123,3 +123,28 @@ class History{
         this.dueDate = dueDate;
     }
 }
+
+class lib implements InterfaceSearch{
+    List <Book> bookList = new ArrayList<>();
+     
+    public void addBook (Book book){
+        bookList.add(book);
+    }
+
+    //for borrowing the books
+    public boolean borrowBook(String bookID){
+        for (Book book : bookList ){
+            if (book.bookID.equals(bookID) && book.bookStatus == BookStatus.AVAILABLE && book.quantity >0){
+                book.quantity--;
+                if (book.quantity == 0){
+                    book.bookStatus = BookStatus.BORROWED;
+                }
+                System.out.println(book.title + "borrowed!");
+                return true; 
+            }
+        }
+        System.out.println("Book unavailable for borrowing.");
+        return false;
+    }
+}
+
