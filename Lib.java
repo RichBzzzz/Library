@@ -215,6 +215,15 @@ class lib implements InterfaceSearch{
     List<History> allHistory;
     List<bill> allBills;
     List <History> borrowHistory = new ArrayList<>();
+
+    
+    // Constructor
+    public lib() {
+        this.bookMap = new HashMap<>();
+        this.userMap = new HashMap<>();
+        this.allHistory = new ArrayList<>();
+        this.allBills = new ArrayList<>();
+    }
     
     //Display Methods
     public void displayAllBooks() {
@@ -389,3 +398,4 @@ class lib implements InterfaceSearch{
         String password = In.nextLine();
     }
 }
+
