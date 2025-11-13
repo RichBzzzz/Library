@@ -229,25 +229,6 @@ class lib implements InterfaceSearch{
         }
     }
 
-    private Genre selectGenreFromInput() {
-        while (true) { 
-            System.out.println("Available Genres:");
-            for (Genre g : Genre.values()) {
-                System.out.print(g.name() + "  ");
-            }
-            System.out.println(); 
-            System.out.print("Enter genre name: ");
-            String genreInput = In.nextLine();
-            
-            try {
-                Genre genre = Genre.valueOf(genreInput.toUpperCase());
-                return genre;
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid genre name. Please try again.");
-            }
-        }
-    }
-
     // Interface Methods 
     @Override
     public List<Book> searchByTitle(String titleQuery) {
@@ -330,6 +311,7 @@ class lib implements InterfaceSearch{
         String password = In.nextLine();
     }
 }
+
 
 
 
