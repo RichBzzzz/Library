@@ -247,6 +247,41 @@ class lib implements InterfaceSearch{
             }
         }
     }
+
+    // Interface Methods 
+    @Override
+    public List<Book> searchByTitle(String titleQuery) {
+        List<Book> results = new ArrayList<>();
+        // Search the map's values
+        for (Book book : bookMap.values()) {
+            if (book.title.toLowerCase().contains(titleQuery.toLowerCase())) { //toLowerCase for case-insensitive search
+                results.add(book);
+            }
+        }
+        return results;
+    }
+
+    @Override
+    public List<Book> searchByGenre(Genre genre) {
+        List<Book> results = new ArrayList<>();
+        for (Book book : bookMap.values()) {
+            if (book.genre == genre) {
+                results.add(book);
+            }
+        }
+        return results;
+    }
+
+    @Override
+    public List<Book> searchByAuthor(String authorQuery) {
+        List<Book> results = new ArrayList<>();
+        for (Book book : bookMap.values()) {
+            if (book.author.toLowerCase().contains(authorQuery.toLowerCase())) { //toLowerCase for case-insensitive search
+                results.add(book);
+            }
+        }
+        return results;
+    }
     
    //for borrowing the books
     public boolean borrowedBook(String bookID, String memberID, String librarianID, String rentDate, String dueDate){
@@ -295,6 +330,7 @@ class lib implements InterfaceSearch{
         String password = In.nextLine();
     }
 }
+
 
 
 
