@@ -184,6 +184,55 @@ class lib implements InterfaceSearch{
         bookList.add(book);
     }
 
+    // Search Methods
+    public void searchAndDisplayByTitle() {
+        System.out.print("Enter title to search for: ");
+        String query = In.nextLine();
+        List<Book> results = searchByTitle(query);
+        System.out.println("\nSearch Results (" + results.size() + " found)");
+        if (results.isEmpty()) {
+            System.out.println("No books found matching that title.");
+        } else {
+            for (Book book : results) {
+                System.out.println(book.toString());
+            }
+        }
+    }
+    
+    public void searchAndDisplayByAuthor() {
+        System.out.print("Enter author to search for: ");
+        String query = In.nextLine();
+        List<Book> results = searchByAuthor(query);
+        System.out.println("\nSearch Results (" + results.size() + " found)");
+        if (results.isEmpty()) {
+            System.out.println("No books found by that author.");
+        } else {
+            for (Book book : results) {
+                System.out.println(book.toString());
+            }
+        }
+    }
+    
+    public void searchAndDisplayByGenre() {
+        System.out.println("Select a Genre to filter by:");
+        for (Genre g : Genre.values()) {
+            System.out.println((g.ordinal() + 1) + ". " + g.name());
+        }
+        System.out.print("Enter genre number: ");
+        int genreChoice = In.nextInt() - 1;
+        Genre genre = Genre.values()[genreChoice];
+        
+        List<Book> results = searchByGenre(genre);
+        System.out.println("\nSub-collection for " + genre.name() + " (" + results.size() + " found)");
+        if (results.isEmpty()) {
+            System.out.println("No books found in this genre.");
+        } else {
+            for (Book book : results) {
+                System.out.println(book.toString());
+            }
+        }
+    }
+    
     //for borrowing the books
     public boolean borrowBook(String bookID){
         for (Book book : bookList ){
@@ -200,6 +249,7 @@ class lib implements InterfaceSearch{
         return false;
     }
 }
+
 
 
 
