@@ -215,12 +215,7 @@ class lib implements InterfaceSearch{
     
     public void searchAndDisplayByGenre() {
         System.out.println("Select a Genre to filter by:");
-        for (Genre g : Genre.values()) {
-            System.out.println((g.ordinal() + 1) + ". " + g.name());
-        }
-        System.out.print("Enter genre number: ");
-        int genreChoice = In.nextInt() - 1;
-        Genre genre = Genre.values()[genreChoice];
+        Genre genre = selectGenreFromInput();
         
         List<Book> results = searchByGenre(genre);
         System.out.println("\nSub-collection for " + genre.name() + " (" + results.size() + " found)");
@@ -232,6 +227,24 @@ class lib implements InterfaceSearch{
             }
         }
     }
+
+    private Genre selectGenreFromInput() {
+        while (true) { 
+            System.out.println("Available Genres:");
+            for (Genre g : Genre.values()) {
+                System.out.print(g.name() + "  ");
+            }
+            System.out.println(); 
+            System.out.print("Enter genre name: ");
+            String genreInput = In.nextLine();
+            
+            try {
+                Genre genre = Genre.valueOf(genreInput.toUpperCase());
+                return genre;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid genre name. Please try again.");
+            }
+        }
     
     //for borrowing the books
     public boolean borrowBook(String bookID){
@@ -249,6 +262,7 @@ class lib implements InterfaceSearch{
         return false;
     }
 }
+
 
 
 
