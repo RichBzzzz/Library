@@ -246,22 +246,41 @@ class lib implements InterfaceSearch{
             }
         }
     
-    //for borrowing the books
-    public boolean borrowBook(String bookID){
+   //for borrowing the books
+    public boolean borrowedBook(String bookID, String memberID, String librarianID, String rentDate, String dueDate){
         for (Book book : bookList ){
             if (book.bookID.equals(bookID) && book.bookStatus == BookStatus.AVAILABLE && book.quantity >0){
                 book.quantity--;
                 if (book.quantity == 0){
                     book.bookStatus = BookStatus.BORROWED;
                 }
-                System.out.println(book.title + "borrowed!");
+                String recordID = "Record" + (borrowHistory.size() + 1);
+                History record = new History(recordID, memberID, librarianID, bookID, rentDate, dueDate);
+                borrowHistory.add(record);
+                System.out.println(book.title + "borrowed by member " + memberID);
                 return true; 
             }
         }
         System.out.println("Book unavailable for borrowing.");
         return false;
     }
+
+    public void showBorrowHistory(String bookID, String memberID, String librarianID, String rentDate, String dueDate, String recordID){
+        System.out.println("Borrow history for member " + memberID);
+        boolean anyHistory = false;
+
+        for (History h : borrowHistory){
+            if (h.memberID.equals(memberID)){
+                System.out.println("Record ID = " + recordID + " ,Book ID = " + bookID + ", Rent date = " + rentDate +", Due date = " + dueDate );
+                anyHistory = true;
+            }
+        }
+        if (!anyHistory){
+            System.out.println("No borrowing history");
+        }
+    }
 }
+
 
 
 
