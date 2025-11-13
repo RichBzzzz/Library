@@ -155,6 +155,7 @@ class lib implements InterfaceSearch{
     Map<String, User> userMap;     
     List<History> allHistory;
     List<bill> allBills;
+    List <History> borrowHistory = new ArrayList<>();
     
     //Display Methods
     public void displayAllBooks() {
@@ -280,6 +281,7 @@ class lib implements InterfaceSearch{
         }
     }
 }
+
 
 
 
