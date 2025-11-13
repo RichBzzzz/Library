@@ -246,6 +246,7 @@ class lib implements InterfaceSearch{
                 System.out.println("Invalid genre name. Please try again.");
             }
         }
+    }
     
    //for borrowing the books
     public boolean borrowedBook(String bookID, String memberID, String librarianID, String rentDate, String dueDate){
@@ -281,6 +282,7 @@ class lib implements InterfaceSearch{
         }
     }
 }
+
 
 
 
