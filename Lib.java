@@ -52,6 +52,14 @@ abstract class User{
         this.password = password;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public String getUserName(){
+        return userName;
+    }
+    
     public boolean checkPassword(String attempt) { // Checks for password
         return this.password.equals(attempt);
     }
@@ -97,7 +105,58 @@ class member extends User{
                 System.out.println(bookWishList.name + " Book ID: " + book.bookID + ", Status: " + book.status + ")");
             }
         }
- }       
+    }
+    public void displayMenu(lib system) {
+        boolean loggedIn = true;
+        while (loggedIn) {
+            System.out.println("\n--- Member Menu ---");
+            System.out.println("Welcome, " + this.name + "!");
+            System.out.println("1. List all books");
+            System.out.println("2. View book details");
+            System.out.println("3. Search by author");
+            System.out.println("4. Search by genre");
+            System.out.println("5. Search by title");
+            System.out.println("6. Borrow a book");
+            System.out.println("7. Return a book");
+            System.out.println("8. Reading wish list");
+            System.out.println("9. Borrowing history");
+            System.out.println("0. Logout");
+            System.out.print("Enter your choice: ");
+
+            int choice = -1;
+            try {
+                choice = In.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+
+            if (choice == 1) {
+                system.displayAllBooks();
+            } else if (choice == 2) {
+                system.viewBookDetails();
+            } else if (choice == 3) {
+                system.searchAndDisplayByAuthor();
+            } else if (choice == 4) {
+                system.searchAndDisplayByGenre();
+            } else if (choice == 5) {
+                system.searchAndDisplayByTitle();
+            } else if (choice == 6) {
+                ;
+            } else if (choice == 7) {
+                ;
+            } else if (choice == 8) {
+                ;
+            } else if (choice == 9) {
+                ;
+            } else if (choice == 0) {
+                loggedIn = false;
+                System.out.println("Logging out...");
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        }
+     }       
 }
 
 class bill{
@@ -229,6 +288,25 @@ class lib implements InterfaceSearch{
         }
     }
 
+    // Helper Methods
+    private Genre selectGenreFromInput() {
+        while (true) {
+            System.out.println("Available Genres:");
+            for (Genre g : Genre.values()) {
+                System.out.print(g.name() + "  ");
+            }
+            System.out.println();
+            System.out.print("Enter genre name: ");
+            String genreInput = In.nextLine();
+            try {
+                Genre genre = Genre.valueOf(genreInput.toUpperCase());
+                return genre; 
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid genre name. Please try again.");
+            }
+        }
+    }
+    
     // Interface Methods 
     @Override
     public List<Book> searchByTitle(String titleQuery) {
@@ -311,15 +389,3 @@ class lib implements InterfaceSearch{
         String password = In.nextLine();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
