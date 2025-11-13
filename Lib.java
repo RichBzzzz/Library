@@ -281,7 +281,21 @@ class lib implements InterfaceSearch{
             System.out.println("No borrowing history");
         }
     }
+    
+    public static void main(String[] args) {
+        List<member> memberList = new ArrayList<>();
+        List<librarian> librarianList = new ArrayList<>();
+        System.out.println("Welcome to the library system");
+        System.out.println("Are you a (1) Member or (2) Librarian?");
+        int whichUser = In.nextInt();
+        
+        System.out.print("Enter username: ");
+        String username = In.nextLine();
+        System.out.print("Enter password: ");
+        String password = In.nextLine();
+    }
 }
+
 
 
 
