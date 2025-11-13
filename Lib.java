@@ -106,7 +106,7 @@ class member extends User{
             }
         }
     }
-    public void displayMenu(lib system) {
+    public void displayMenu(Library system) {
         boolean loggedIn = true;
         while (loggedIn) {
             System.out.println("\n--- Member Menu ---");
@@ -208,7 +208,7 @@ class History{
     }
 }
 
-class lib implements InterfaceSearch{
+class Library implements InterfaceSearch{
     List <Book> bookList = new ArrayList<>();
     Map<String, Book> bookMap;
     Map<String, User> userMap;     
@@ -218,7 +218,7 @@ class lib implements InterfaceSearch{
 
     
     // Constructor
-    public lib() {
+    public Library() {
         this.bookMap = new HashMap<>();
         this.userMap = new HashMap<>();
         this.allHistory = new ArrayList<>();
@@ -398,4 +398,5 @@ class lib implements InterfaceSearch{
         String password = In.nextLine();
     }
 }
+
 
