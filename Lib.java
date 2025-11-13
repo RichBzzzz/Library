@@ -67,10 +67,37 @@ class librarian extends User{
 
 class member extends User{
     String memberID;
+    List <readingList> memberReadingList;
     public member(String name, String userName, String password, String memberID){
         super(name, userName, password);
         this.memberID = memberID;
+        this.memberReadingList = new ArrayList<>();
     }
+
+    public void addReadingList(){
+        boolean addMore = true;
+        while (addMore){
+            System.out.println("Enter the book title you want to add in your reading list");
+            String title = In.nextLine();
+            System.out.println("Enter the book ID");
+            String bookID = In.nextLine();
+            String status = "To read";
+
+            readingList book = new readingList(title, memberID, bookID, status);
+            memberReadingList.add(book);
+
+            System.out.println("Would you like to add another book? (y/n)");
+            String yesNo = In.nextLine();
+            if (yesNo.equalsIgnoreCase("no")){
+                addMore = false;
+            }
+            System.out.println("Book successfuly stored in reading list.\n");
+            System.out.println("Current reading list = ");
+            for (readingList bookWishList : memberReadingList){
+                System.out.println("- " + book.name + " (Book ID: " + book.bookID + ", Status: " + book.status + ")");
+            }
+        }
+ }       
 }
 
 class bill{
@@ -93,15 +120,13 @@ class readingList{
     String name;
     String memberID;
     String bookID;
-    String readDate;
-    String progress;
+    String status;
     
-    public readingList(String name, String memberID, String bookID, String readDate, String progress){
+    public readingList(String name, String memberID, String bookID, String status){
         this.name = name;
         this.memberID = memberID;
         this.bookID = bookID;
-        this.readDate = readDate;
-        this.progress = progress;
+        this.status = status;
             
     }
 }
@@ -147,4 +172,5 @@ class lib implements InterfaceSearch{
         return false;
     }
 }
+
 
