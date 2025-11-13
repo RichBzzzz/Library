@@ -94,7 +94,7 @@ class member extends User{
             System.out.println("Book successfuly stored in reading list.\n");
             System.out.println("Current reading list = ");
             for (readingList bookWishList : memberReadingList){
-                System.out.println("- " + book.name + " (Book ID: " + book.bookID + ", Status: " + book.status + ")");
+                System.out.println(bookWishList.name + " Book ID: " + book.bookID + ", Status: " + book.status + ")");
             }
         }
  }       
@@ -282,6 +282,7 @@ class lib implements InterfaceSearch{
         }
     }
 }
+
 
 
 
