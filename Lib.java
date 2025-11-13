@@ -151,7 +151,35 @@ class History{
 
 class lib implements InterfaceSearch{
     List <Book> bookList = new ArrayList<>();
-     
+    Map<String, Book> bookMap;
+    Map<String, User> userMap;     
+    List<History> allHistory;
+    List<bill> allBills;
+    
+    //Display Methods
+    public void displayAllBooks() {
+        System.out.println("\n--- All Books in Library ---");
+        for (Book book : bookMap.values()) {
+            System.out.println(book.toString());
+        }
+    }
+    
+    public Book findBookById(String bookId) {
+        return bookMap.get(bookId);
+    }
+
+    public void viewBookDetails() {
+        System.out.print("Enter Book ID to view details: ");
+        String bookId = In.nextLine();
+        Book book = findBookById(bookId);
+        if (book != null) {
+            System.out.println("--- Book Details ---");
+            System.out.println(book.toString());
+        } else {
+            System.out.println("Book not found with ID: " + bookId);
+        }
+    }
+
     public void addBook (Book book){
         bookList.add(book);
     }
@@ -172,5 +200,6 @@ class lib implements InterfaceSearch{
         return false;
     }
 }
+
 
 
