@@ -340,13 +340,22 @@ class Library implements InterfaceSearch{
     //Display Methods
     public void displayAllBooks() {
         System.out.println("\n--- All Books in Library ---");
-        for (Book book : bookMap.values()) {
+        if (allBooks.isEmpty()) {
+            System.out.println("There are no books in the library system.");
+            return;
+        }
+        for (Book book : allBooks) {
             System.out.println(book.toString());
         }
     }
     
     public Book findBookById(String bookId) {
-        return bookMap.get(bookId);
+        for (Book book : allBooks) {
+            if (book.getBookID().equals(bookId)) {
+                return book;
+            }
+        }
+        return null;
     }
 
     public void viewBookDetails() {
@@ -541,4 +550,5 @@ class Library implements InterfaceSearch{
     }
     }
 }
+
 
