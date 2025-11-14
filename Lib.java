@@ -692,21 +692,32 @@ class Library implements InterfaceSearch{
         // Horror
         system.addBook(new Book("B003", "Pet Sematary", "Stephen King", Genre.HORROR, BookStatus.AVAILABLE, 3));
         system.addBook(new Book("B004", "Bird Box", "Josh Malerman", Genre.HORROR, BookStatus.AVAILABLE, 2));
-
+        system.addBook(new Book("B002", "Dracula", "Bram Stoker", Genre.HORROR, BookStatus.AVAILABLE, 1));
+        system.addBook(new Book("B012", "Caroline", "Neil Geiman", Genre.HORROR, BookStatus.AVAILABLE, 4));
+        
+        //Fantasy
         system.addBook(new Book("B001", "The Hobbit", "J.R.R. Tolkien", Genre.FANTASY, BookStatus.AVAILABLE, 5));
         system.addBook(new Book("B005", "A Game of Thrones", "George R. R. Martin", Genre.FANTASY, BookStatus.AVAILABLE, 4));
+        system.addBook(new Book("B013", "Harry Potter", "J.K.Rowling", Genre.FANTASY, BookStatus.AVAILABLE, 2));
+        system.addBook(new Book("B014", "Alice's Adventure in Wonderland", "Lewis Caroll", Genre.FANTASY, BookStatus.AVAILABLE, 3));
 
         // Romance
         system.addBook(new Book("B006", "The Great Gatsby", "F. Scott Fitzgerald", Genre.ROMANCE, BookStatus.AVAILABLE, 3));
         system.addBook(new Book("B007", "Pride and Prejudice", "Jane Austen", Genre.ROMANCE, BookStatus.AVAILABLE, 4));
+        system.addBook(new Book("B015", "Romeo and Juliet", "William Shakespear", Genre.ROMANCE, BookStatus.AVAILABLE, 1));
+        system.addBook(new Book("B016", "It Ends with Us", "Colleen Hoover", Genre.ROMANCE, BookStatus.AVAILABLE, 2));
 
         // Self Help
         system.addBook(new Book("B008", "10% Happier", "Dan Harris", Genre.SELF_HELP, BookStatus.AVAILABLE, 2));
         system.addBook(new Book("B009", "The End of Mental Illness", "Daniel G. Amen", Genre.SELF_HELP, BookStatus.AVAILABLE, 3));
+        system.addBook(new Book("B017", "Atomic Habits", "James Clear", Genre.SELF_HELP, BookStatus.AVAILABLE, 3));
+        system.addBook(new Book("B018", "The 5AM Club", "Robin Sharma", Genre.SELF_HELP, BookStatus.AVAILABLE, 4));
 
         // Biography
         system.addBook(new Book("B010", "The Diary of a Young Girl", "Anne Frank", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 4));
         system.addBook(new Book("B011", "A Promised Land", "Barack Obama", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 2));
+        system.addBook(new Book("B019", "The Diary of a Young Girl", "Anne Frank", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 1));
+        system.addBook(new Book("B020", "Long Walk to Freedom", "Nelson Mandela", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 2));
         
         boolean running = true;
         while (running) {
@@ -741,6 +752,7 @@ class Library implements InterfaceSearch{
         }
     }
 }
+
 
 
 
