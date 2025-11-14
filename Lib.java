@@ -470,6 +470,72 @@ class Library implements InterfaceSearch{
         }
         return results;
     }
+
+    // Adding New Books/Stock
+    public void addNewBookOrStock() {
+        System.out.print("Enter Book ID (e.g., B001): ");
+        String id = In.nextLine();
+        
+        Book existingBook = findBookById(id);
+        
+        if (existingBook != null) {
+            System.out.println("Book already exists: " + existingBook.getTitle());
+            System.out.print("Enter quantity to add: ");
+            try {
+                int amount = In.nextInt();
+                In.nextLine(); // consume newline
+                existingBook.addQuantity(amount);
+                System.out.println("Stock updated. New quantity: " + existingBook.getQuantity());
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid number. No stock added.");
+                In.nextLine(); // clear bad input
+            }
+        } else {
+            System.out.println("Adding new book...");
+            System.out.print("Enter Title: ");
+            String title = In.nextLine();
+            System.out.print("Enter Author: ");
+            String author = In.nextLine();
+            Genre genre = selectGenreFromInput();
+            System.out.print("Enter initial quantity: ");
+            try {
+                int quantity = In.nextInt();
+                In.nextLine(); // consume newline
+                
+                Book newBook = new Book(id, title, author, genre, BookStatus.AVAILABLE, quantity);
+                this.addBook(newBook);
+                System.out.println("New book added successfully!");
+                System.out.println(newBook.toString());
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid number. Book not added.");
+                In.nextLine(); // clear bad input
+            }
+        }
+    }
+
+    // Remove Book
+    public void removeBookStock() {
+        System.out.print("Enter Book ID to remove stock from: ");
+        String id = In.nextLine();
+        
+        Book book = findBookById(id);
+        
+        if (book != null) {
+            System.out.println("Current stock for '" + book.getTitle() + "': " + book.getQuantity());
+            System.out.print("Enter quantity to remove: ");
+            try {
+                int amount = In.nextInt();
+                In.nextLine(); // consume newline
+                book.removeQuantity(amount);
+                System.out.println("Stock updated. New quantity: " + book.getQuantity());
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid number. No stock removed.");
+                In.nextLine(); // clear bad input
+            }
+        } else {
+            System.out.println("Book not found with ID: " + id);
+        }
+    }
     
    //for borrowing the books
     public boolean borrowedBook(String bookID, String memberID, String librarianID, String rentDate, String dueDate){
@@ -550,5 +616,6 @@ class Library implements InterfaceSearch{
     }
     }
 }
+
 
 
