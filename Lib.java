@@ -588,17 +588,62 @@ class Library implements InterfaceSearch{
         System.out.println("Successfuly returned book!");
         return true;
     }
-    
-    public static void main(String[] args) {
-        Library system = new Library();
-        List<Member> memberList = new ArrayList<>();
-        List<Librarian> librarianList = new ArrayList<>();
+    // Registration Methods
+    public static boolean isUsernameTaken(String username, List<Member> memberList, List<Librarian> librarianList) {
+        for (Member m : memberList) {
+            if (m.getUserName().equals(username)) {
+                return true;
+            }
+        }
+        for (Librarian l : librarianList) {
+            if (l.getUserName().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-        System.out.println("Welcome to the library system");
+    public static void registerNewUser(List<Member> memberList, List<Librarian> librarianList) {
+        System.out.println("\n--- New Account Registration ---");
+        System.out.println("Are you a 1.Member or 2.Librarian?");
+        int userType = In.nextInt();
+
+        System.out.print("Enter your full name: ");
+        String name = In.nextLine();
+        System.out.print("Enter a new username: ");
+        String username = In.nextLine();
+
+        if (isUsernameTaken(username, memberList, librarianList)) {
+            System.out.println("Error: This username is already taken. Please try again.");
+            return;
+        }
+
+        System.out.print("Enter a new password: ");
+        String password = In.nextLine();
+
+        if (userType == 1) {
+            String memberID = "M" + (memberList.size() + 1);
+            Member newMember = new Member(name, username, password, memberID);
+            memberList.add(newMember);
+            System.out.println("Member account created successfully! Your Member ID is " + memberID);
+
+        } else if (userType == 2) {
+            String librarianID = "L" + (librarianList.size() + 1);
+            Librarian newLibrarian = new Librarian(name, username, password, librarianID);
+            librarianList.add(newLibrarian);
+            System.out.println("Librarian account created successfully! Your Librarian ID is " + librarianID);
+
+        } else {
+            System.out.println("Invalid user type. Registration cancelled.");
+        }
+    }
+
+    public static void loginUser(Library system, List<Member> memberList, List<Librarian> librarianList) {
+        System.out.println("\n--- User Login ---");
         System.out.println("Are you a 1.Member or 2.Librarian?");
         int whichUser = In.nextInt();
-        In.nextLine();
-        System.out.print("\n Enter username: ");
+
+        System.out.print("\nEnter username: ");
         String username = In.nextLine();
         System.out.print("Enter password: ");
         String password = In.nextLine();
@@ -617,10 +662,10 @@ class Library implements InterfaceSearch{
             } else {
                 System.out.println("Invalid username/password.");
             }
-        }else if (whichUser ==2 ){
+        } else if (whichUser == 2) {
             Librarian loggedInLibrarian = null;
-            for (Librarian l : librarianList){
-                if (l.userName.equals(username) && l.checkPassword(password)){
+            for (Librarian l : librarianList) {
+                if (l.userName.equals(username) && l.checkPassword(password)) {
                     loggedInLibrarian = l;
                     break;
                 }
@@ -631,9 +676,51 @@ class Library implements InterfaceSearch{
             } else {
                 System.out.println("Invalid username/password");
             }
+        } else {
+            System.out.println("Invalid user type.");
+        }
     }
+
+    
+    public static void main(String[] args) {
+        Library system = new Library();
+        List<Member> memberList = new ArrayList<>();
+        List<Librarian> librarianList = new ArrayList<>();
+
+        boolean running = true;
+        while (running) {
+            System.out.println("\nWelcome to the Library System");
+            System.out.println("1. Login");
+            System.out.println("2. Register new account");
+            System.out.println("0. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = -1;
+            try {
+                 choice = In.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+            
+            switch (choice) {
+                case 1:
+                    loginUser(system, memberList, librarianList);
+                    break;
+                case 2:
+                    registerNewUser(memberList, librarianList);
+                    break;
+                case 0:
+                    running = false;
+                    System.out.println("Exiting system. Goodbye!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
     }
 }
+
 
 
 
