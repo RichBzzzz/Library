@@ -20,10 +20,10 @@ interface InterfaceSearch {
 }
 
 class Book {
-    String bookID;
-    String title;
-    String author;
-    Genre genre;
+    private String bookID;
+    private String title;
+    private String author;
+    private Genre genre;
     BookStatus bookStatus;
     int quantity;
 
@@ -36,15 +36,77 @@ class Book {
         this.quantity = quantity;
     }
     
+    public void updateStatus() {
+        if (this.quantity > 0) {
+            this.bookStatus = BookStatus.AVAILABLE;
+        } else {
+            this.bookStatus = BookStatus.BORROWED;
+        }
+    }
+    
+    // --- Getters ---
+    public String getBookID() { 
+        return bookID; 
+    }
+
+    public String getTitle() { 
+        return title; 
+    }
+
+    public String getAuthor() { 
+        return author; 
+    }
+
+    public Genre getGenre() { 
+        return genre; 
+    }
+
+    public BookStatus getStatus() {
+        return bookStatus; 
+    }
+
+    public int getQuantity() { 
+        return quantity; 
+    }
+    
+    public void borrowCopy() {
+        if (this.quantity > 0) {
+            this.quantity--;
+        }
+        updateStatus();
+    }
+    
+    public void returnCopy() {
+        this.quantity++;
+        updateStatus();
+    }
+
+    public void addQuantity(int amount) {
+        if (amount > 0) {
+            this.quantity += amount;
+            updateStatus();
+        }
+    }
+    
+    public void removeQuantity(int amount) {
+        if (amount > 0) {
+            this.quantity -= amount;
+            if (this.quantity < 0) {
+                this.quantity = 0;
+            }
+            updateStatus();
+        }
+    }
+    
     public String toString(){
         return "Book [ID = " + bookID + ", Title = '" + title + "', Author = '" + author + "', Genre = " + genre + ", Status = " + bookStatus + ", Quantity = " + quantity + "]";
     }
 }
 
 abstract class User{
-    String name;
-    String userName;
-    String password;
+    protected String name;
+    protected String userName;
+    protected String password;
 
     public User(String name, String userName, String password){
         this.name = name;
@@ -66,11 +128,62 @@ abstract class User{
 }
 
 class librarian extends User{
-    String librarianID;
+    private String librarianID;
     public librarian(String name, String userName, String password, String librarianID){
         super(name, userName, password);
         this.librarianID = librarianID;
     }   
+
+    public String getLibrarianID() { 
+        return librarianID; 
+    }
+
+    public void displayMenu(Library system) {
+        boolean loggedIn = true;
+        while (loggedIn) {
+            System.out.println("\n--- Librarian Menu ---");
+            System.out.println("1. List all books");
+            System.out.println("2. View book details");
+            System.out.println("3. Search by author");
+            System.out.println("4. Search by genre");
+            System.out.println("5. Search by title");
+            System.out.println("6. Add a new book / Add stock");
+            System.out.println("7. Remove book stock");
+            System.out.println("0. Logout");
+            System.out.print("Enter your choice: ");
+
+            int choice = -1;
+            try {
+                choice = In.nextInt();
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                continue;
+            }
+
+            if (choice == 1) {
+                system.displayAllBooks();
+            } else if (choice == 2) {
+                system.viewBookDetails();
+            } else if (choice == 3) {
+                system.searchAndDisplayByAuthor();
+            } else if (choice == 4) {
+                system.searchAndDisplayByGenre();
+            } else if (choice == 5) {
+                system.searchAndDisplayByTitle();
+            } else if (choice == 6) {
+                ;
+            } else if (choice == 7) {
+                ;
+            } else if (choice == 8) {
+                ;
+            } else if (choice == 0) {
+                loggedIn = false;
+                System.out.println("Logging out...");
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
 }
 
 class member extends User{
@@ -398,5 +511,6 @@ class Library implements InterfaceSearch{
         String password = In.nextLine();
     }
 }
+
 
 
