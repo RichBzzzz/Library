@@ -717,7 +717,7 @@ class Library implements InterfaceSearch{
         // Biography
         system.addBook(new Book("B010", "The Diary of a Young Girl", "Anne Frank", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 4));
         system.addBook(new Book("B011", "A Promised Land", "Barack Obama", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 2));
-        system.addBook(new Book("B019", "The Diary of a Young Girl", "Anne Frank", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 1));
+        system.addBook(new Book("B019", "Steve Jobs", "Walter Isaacson", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 1));
         system.addBook(new Book("B020", "Long Walk to Freedom", "Nelson Mandela", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 2));
         
         boolean running = true;
@@ -753,6 +753,7 @@ class Library implements InterfaceSearch{
         }
     }
 }
+
 
 
 
