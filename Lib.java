@@ -689,6 +689,25 @@ class Library implements InterfaceSearch{
         List<Member> memberList = new ArrayList<>();
         List<Librarian> librarianList = new ArrayList<>();
 
+        // Horror
+        system.addBook(new Book("B003", "Pet Sematary", "Stephen King", Genre.HORROR, BookStatus.AVAILABLE, 3));
+        system.addBook(new Book("B004", "Bird Box", "Josh Malerman", Genre.HORROR, BookStatus.AVAILABLE, 2));
+
+        system.addBook(new Book("B001", "The Hobbit", "J.R.R. Tolkien", Genre.FANTASY, BookStatus.AVAILABLE, 5));
+        system.addBook(new Book("B005", "A Game of Thrones", "George R. R. Martin", Genre.FANTASY, BookStatus.AVAILABLE, 4));
+
+        // Romance
+        system.addBook(new Book("B006", "The Great Gatsby", "F. Scott Fitzgerald", Genre.ROMANCE, BookStatus.AVAILABLE, 3));
+        system.addBook(new Book("B007", "Pride and Prejudice", "Jane Austen", Genre.ROMANCE, BookStatus.AVAILABLE, 4));
+
+        // Self Help
+        system.addBook(new Book("B008", "10% Happier", "Dan Harris", Genre.SELF_HELP, BookStatus.AVAILABLE, 2));
+        system.addBook(new Book("B009", "The End of Mental Illness", "Daniel G. Amen", Genre.SELF_HELP, BookStatus.AVAILABLE, 3));
+
+        // Biography
+        system.addBook(new Book("B010", "The Diary of a Young Girl", "Anne Frank", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 4));
+        system.addBook(new Book("B011", "A Promised Land", "Barack Obama", Genre.BIOGRAPHY, BookStatus.AVAILABLE, 2));
+        
         boolean running = true;
         while (running) {
             System.out.println("\nWelcome to the Library System");
@@ -722,6 +741,7 @@ class Library implements InterfaceSearch{
         }
     }
 }
+
 
 
 
