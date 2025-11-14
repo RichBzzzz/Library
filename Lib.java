@@ -138,7 +138,7 @@ class librarian extends User{
         return librarianID; 
     }
 
-    public void displayMenu(Library system) {
+    public void displayLibrarianMenu(Library system) {
         boolean loggedIn = true;
         while (loggedIn) {
             System.out.println("\n--- Librarian Menu ---");
@@ -219,7 +219,7 @@ class member extends User{
             }
         }
     }
-    public void displayMenu(Library system) {
+    public void displayMemberMenu(Library system) {
         boolean loggedIn = true;
         while (loggedIn) {
             System.out.println("\n--- Member Menu ---");
@@ -269,8 +269,9 @@ class member extends User{
                 System.out.println("Invalid choice. Please try again.");
             }
         }
-     }       
-}
+     }    
+    }   
+
 
 class bill{
     String billID;
@@ -324,7 +325,6 @@ class History{
 class Library implements InterfaceSearch{
     List <Book> bookList = new ArrayList<>();
     Map<String, Book> bookMap;
-    Map<String, User> userMap;     
     List<History> allHistory;
     List<bill> allBills;
     List <History> borrowHistory = new ArrayList<>();
@@ -333,7 +333,6 @@ class Library implements InterfaceSearch{
     // Constructor
     public Library() {
         this.bookMap = new HashMap<>();
-        this.userMap = new HashMap<>();
         this.allHistory = new ArrayList<>();
         this.allBills = new ArrayList<>();
     }
@@ -479,7 +478,7 @@ class Library implements InterfaceSearch{
                 return true; 
             }
         }
-        System.out.println("Book unavailable for borrowing.");
+        System.out.println("Book unavailable");
         return false;
     }
 
@@ -499,19 +498,47 @@ class Library implements InterfaceSearch{
     }
     
     public static void main(String[] args) {
+        Library system = new Library();
         List<member> memberList = new ArrayList<>();
         List<librarian> librarianList = new ArrayList<>();
+
         System.out.println("Welcome to the library system");
-        System.out.println("Are you a (1) Member or (2) Librarian?");
+        System.out.println("Are you a 1.Member or 2.Librarian?");
         int whichUser = In.nextInt();
-        
-        System.out.print("Enter username: ");
+        In.nextLine();
+        System.out.print("\n Enter username: ");
         String username = In.nextLine();
         System.out.print("Enter password: ");
         String password = In.nextLine();
+
+        if (whichUser == 1) {
+            member loggedInMember = null;
+            for (member m : memberList) {
+                if (m.userName.equals(username) && m.checkPassword(password)) {
+                    loggedInMember = m;
+                    break;
+                }
+            }
+            if (loggedInMember != null) {
+                System.out.println("Login successful!");
+                loggedInMember.displayMemberMenu(system);
+            } else {
+                System.out.println("Invalid username/password.");
+            }
+        }else if (whichUser ==2 ){
+            librarian loggedInLibrarian = null;
+            for (librarian l : librarianList){
+                if (l.userName.equals(username) && l.checkPassword(password)){
+                    loggedInLibrarian = l;
+                    break;
+                }
+            }
+            if (loggedInLibrarian != null) {
+                System.out.println("Login successful!");
+                loggedInLibrarian.displayLibrarianMenu(system);
+            } else {
+                System.out.println("Invalid username/password");
+            }
+    }
     }
 }
-
-
-
-
