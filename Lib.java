@@ -97,7 +97,8 @@ class Book {
             updateStatus();
         }
     }
-    
+
+    @Override
     public String toString(){
         return "Book [ID = " + bookID + ", Title = '" + title + "', Author = '" + author + "', Genre = " + genre + ", Status = " + bookStatus + ", Quantity = " + quantity + "]";
     }
@@ -752,6 +753,7 @@ class Library implements InterfaceSearch{
         }
     }
 }
+
 
 
 
