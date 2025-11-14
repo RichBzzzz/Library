@@ -127,9 +127,9 @@ abstract class User{
     }
 }
 
-class librarian extends User{
+class Librarian extends User{
     private String librarianID;
-    public librarian(String name, String userName, String password, String librarianID){
+    public Librarian(String name, String userName, String password, String librarianID){
         super(name, userName, password);
         this.librarianID = librarianID;
     }   
@@ -184,10 +184,10 @@ class librarian extends User{
     }
 }
 
-class member extends User{
+class Member extends User{
     String memberID;
     List <readingList> memberReadingList;
-    public member(String name, String userName, String password, String memberID){
+    public Member(String name, String userName, String password, String memberID){
         super(name, userName, password);
         this.memberID = memberID;
         this.memberReadingList = new ArrayList<>();
@@ -210,10 +210,10 @@ class member extends User{
             if (yesNo.equalsIgnoreCase("no")){
                 addMore = false;
             }
-            System.out.println("Book successfuly stored in reading list.\n");
+            System.out.println("Book successfuly stored in reading list");
             System.out.println("Current reading list = ");
             for (readingList bookWishList : memberReadingList){
-                System.out.println(bookWishList.name + " Book ID: " + book.bookID + ", Status: " + book.status + ")");
+                System.out.println(bookWishList.name + " Book ID: " + bookWishList.bookID + ", Status: " + bookWishList.status );
             }
         }
     }
@@ -253,13 +253,22 @@ class member extends User{
             } else if (choice == 5) {
                 system.searchAndDisplayByTitle();
             } else if (choice == 6) {
-                ;
+                System.out.println("Enter book ID you want to borrow");
+                String bookID = In.nextLine(); 
+
+                System.out.println("Enter rent date");
+                String rentDate = In.nextLine();
+
+                System.out.println("Enter due date");
+                String dueDate = In.nextLine();
+
+                system.borrowedBook(bookID, this.memberID,rentDate,dueDate);
             } else if (choice == 7) {
-                ;
+                system.returnBorrowedBook(this.memberID);
             } else if (choice == 8) {
-                ;
+                addReadingList();
             } else if (choice == 9) {
-                ;
+                system.showBorrowHistory(this.memberID);
             } else if (choice == 0) {
                 loggedIn = false;
                 System.out.println("Logging out...");
@@ -269,7 +278,6 @@ class member extends User{
         }
      }    
     }   
-
 
 class readingList{
     String name;
@@ -289,15 +297,13 @@ class readingList{
 class History{
     String recordID;
     String memberID;
-    String librarianID;
     String bookID;
     String rentDate;
     String dueDate;
     
-    public History(String recordID, String memberID, String librarianID, String bookID, String rentDate, String dueDate){
+    public History(String recordID, String memberID, String bookID, String rentDate, String dueDate){
         this.recordID = recordID;
         this.memberID = memberID;
-        this.librarianID = librarianID;
         this.bookID = bookID;
         this.rentDate = rentDate;
         this.dueDate = dueDate;
@@ -305,10 +311,8 @@ class History{
 }
 
 class Library implements InterfaceSearch{
-    List <Book> bookList = new ArrayList<>();
     private List<Book> allBooks;
     List<History> allHistory;
-    List<bill> allBills;
     List <History> borrowHistory = new ArrayList<>();
 
     
@@ -316,7 +320,6 @@ class Library implements InterfaceSearch{
     public Library() {
         this.allBooks = new ArrayList<>();
         this.allHistory = new ArrayList<>();
-        this.allBills = new ArrayList<>();
     }
     
     //Display Methods
@@ -353,7 +356,7 @@ class Library implements InterfaceSearch{
     }
 
     public void addBook (Book book){
-        bookList.add(book);
+        allBooks.add(book);
     }
 
     // Search Methods
@@ -520,15 +523,15 @@ class Library implements InterfaceSearch{
     }
     
    //for borrowing the books
-    public boolean borrowedBook(String bookID, String memberID, String librarianID, String rentDate, String dueDate){
-        for (Book book : bookList ){
+    public boolean borrowedBook(String bookID, String memberID, String rentDate, String dueDate){
+        for (Book book : allBooks ){
             if (book.getBookID().equals(bookID) && book.bookStatus == BookStatus.AVAILABLE && book.quantity >0){
                 book.quantity--;
                 if (book.quantity == 0){
                     book.bookStatus = BookStatus.BORROWED;
                 }
                 String recordID = "Record" + (borrowHistory.size() + 1);
-                History record = new History(recordID, memberID, librarianID, bookID, rentDate, dueDate);
+                History record = new History(recordID, memberID,bookID, rentDate, dueDate);
                 borrowHistory.add(record);
                 System.out.println(book.getTitle() + "borrowed by member " + memberID);
                 return true; 
@@ -538,13 +541,13 @@ class Library implements InterfaceSearch{
         return false;
     }
 
-    public void showBorrowHistory(String bookID, String memberID, String librarianID, String rentDate, String dueDate, String recordID){
+    public void showBorrowHistory(String memberID){
         System.out.println("Borrow history for member " + memberID);
         boolean anyHistory = false;
 
         for (History h : borrowHistory){
             if (h.memberID.equals(memberID)){
-                System.out.println("Record ID = " + recordID + " ,Book ID = " + bookID + ", Rent date = " + rentDate +", Due date = " + dueDate );
+                System.out.println("Record ID = " + h.recordID + " ,Book ID = " + h.bookID + ", Rent date = " + h.rentDate +", Due date = " + h.dueDate );
                 anyHistory = true;
             }
         }
@@ -554,10 +557,7 @@ class Library implements InterfaceSearch{
     }
 
     //Return borrowed book
-    public boolean returnBorrowedBook(){
-        System.out.println("Enter your member ID");
-        String memberID = In.nextLine();
-
+    public boolean returnBorrowedBook(String memberID){
         System.out.println("Enter the book ID you would like to return");
         String bookID = In.nextLine();
 
@@ -574,7 +574,7 @@ class Library implements InterfaceSearch{
         }
 
         Book bookBeingReturned = null;
-        for (Book b: bookList){
+        for (Book b: allBooks){
             if (b.getBookID().equals(bookID)){
                 bookBeingReturned = b;
                 break;
@@ -591,8 +591,8 @@ class Library implements InterfaceSearch{
     
     public static void main(String[] args) {
         Library system = new Library();
-        List<member> memberList = new ArrayList<>();
-        List<librarian> librarianList = new ArrayList<>();
+        List<Member> memberList = new ArrayList<>();
+        List<Librarian> librarianList = new ArrayList<>();
 
         System.out.println("Welcome to the library system");
         System.out.println("Are you a 1.Member or 2.Librarian?");
@@ -604,8 +604,8 @@ class Library implements InterfaceSearch{
         String password = In.nextLine();
 
         if (whichUser == 1) {
-            member loggedInMember = null;
-            for (member m : memberList) {
+            Member loggedInMember = null;
+            for (Member m : memberList) {
                 if (m.userName.equals(username) && m.checkPassword(password)) {
                     loggedInMember = m;
                     break;
@@ -618,8 +618,8 @@ class Library implements InterfaceSearch{
                 System.out.println("Invalid username/password.");
             }
         }else if (whichUser ==2 ){
-            librarian loggedInLibrarian = null;
-            for (librarian l : librarianList){
+            Librarian loggedInLibrarian = null;
+            for (Librarian l : librarianList){
                 if (l.userName.equals(username) && l.checkPassword(password)){
                     loggedInLibrarian = l;
                     break;
@@ -634,8 +634,6 @@ class Library implements InterfaceSearch{
     }
     }
 }
-
-
 
 
 
