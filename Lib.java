@@ -271,22 +271,6 @@ class member extends User{
     }   
 
 
-class bill{
-    String billID;
-    String date;
-    String memberID;
-    String librarianID;
-    double amount;
-    
-    public bill(String billID, String date, String memberID, String librarianID, double amount){
-        this.billID = billID;
-        this.date = date;
-        this.memberID = memberID;
-        this.librarianID = librarianID;
-        this.amount = amount;
-    }
-}
-
 class readingList{
     String name;
     String memberID;
@@ -650,6 +634,7 @@ class Library implements InterfaceSearch{
     }
     }
 }
+
 
 
 
