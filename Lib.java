@@ -324,7 +324,7 @@ class History{
 
 class Library implements InterfaceSearch{
     List <Book> bookList = new ArrayList<>();
-    Map<String, Book> bookMap;
+    private List<Book> allBooks;
     List<History> allHistory;
     List<bill> allBills;
     List <History> borrowHistory = new ArrayList<>();
@@ -332,7 +332,7 @@ class Library implements InterfaceSearch{
     
     // Constructor
     public Library() {
-        this.bookMap = new HashMap<>();
+        this.allBooks = new ArrayList<>();
         this.allHistory = new ArrayList<>();
         this.allBills = new ArrayList<>();
     }
@@ -432,9 +432,8 @@ class Library implements InterfaceSearch{
     @Override
     public List<Book> searchByTitle(String titleQuery) {
         List<Book> results = new ArrayList<>();
-        // Search the map's values
-        for (Book book : bookMap.values()) {
-            if (book.getTitle().toLowerCase().contains(titleQuery.toLowerCase())) { //toLowerCase for case-insensitive search
+        for (Book book : allBooks) {
+            if (book.getTitle().toLowerCase().contains(titleQuery.toLowerCase())) { // Case-insensitive search
                 results.add(book);
             }
         }
@@ -444,7 +443,7 @@ class Library implements InterfaceSearch{
     @Override
     public List<Book> searchByGenre(Genre genre) {
         List<Book> results = new ArrayList<>();
-        for (Book book : bookMap.values()) {
+        for (Book book : allBooks) {
             if (book.getGenre() == genre) {
                 results.add(book);
             }
@@ -455,8 +454,8 @@ class Library implements InterfaceSearch{
     @Override
     public List<Book> searchByAuthor(String authorQuery) {
         List<Book> results = new ArrayList<>();
-        for (Book book : bookMap.values()) {
-            if (book.getAuthor().toLowerCase().contains(authorQuery.toLowerCase())) { //toLowerCase for case-insensitive search
+        for (Book book : allBooks) {
+            if (book.getAuthor().toLowerCase().contains(authorQuery.toLowerCase())) { 
                 results.add(book);
             }
         }
@@ -542,3 +541,4 @@ class Library implements InterfaceSearch{
     }
     }
 }
+
