@@ -568,6 +568,42 @@ class Library implements InterfaceSearch{
             System.out.println("No borrowing history");
         }
     }
+
+    //Return borrowed book
+    public boolean returnBorrowedBook(){
+        System.out.println("Enter your member ID");
+        String memberID = In.nextLine();
+
+        System.out.println("Enter the book ID you would like to return");
+        String bookID = In.nextLine();
+
+        History borrowedRecord = null;
+        for (History h : borrowHistory) {
+            if (h.memberID.equals(memberID) && h.bookID.equals(bookID)) {
+            borrowedRecord = h;
+            break;
+            }
+        }
+        if (borrowedRecord == null){
+            System.out.println("Book was not borrowed");
+            return false;
+        }
+
+        Book bookBeingReturned = null;
+        for (Book b: bookList){
+            if (b.getBookID().equals(bookID)){
+                bookBeingReturned = b;
+                break;
+            }
+        }
+        if (bookBeingReturned == null){
+            System.out.println("Error");
+            return false;
+        }
+        bookBeingReturned.returnCopy();
+        System.out.println("Successfuly returned book!");
+        return true;
+    }
     
     public static void main(String[] args) {
         Library system = new Library();
@@ -614,6 +650,7 @@ class Library implements InterfaceSearch{
     }
     }
 }
+
 
 
 
