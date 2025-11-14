@@ -207,7 +207,7 @@ class Member extends User{
 
             System.out.println("Would you like to add another book? (y/n)");
             String yesNo = In.nextLine();
-            if (yesNo.equalsIgnoreCase("no")){
+            if (yesNo.equalsIgnoreCase("n")){
                 addMore = false;
             }
             System.out.println("Book successfuly stored in reading list");
@@ -752,6 +752,7 @@ class Library implements InterfaceSearch{
         }
     }
 }
+
 
 
 
