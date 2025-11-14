@@ -171,11 +171,9 @@ class librarian extends User{
             } else if (choice == 5) {
                 system.searchAndDisplayByTitle();
             } else if (choice == 6) {
-                ;
+                system.addNewBookOrStock();
             } else if (choice == 7) {
-                ;
-            } else if (choice == 8) {
-                ;
+                system.removeBookStock();
             } else if (choice == 0) {
                 loggedIn = false;
                 System.out.println("Logging out...");
@@ -616,6 +614,7 @@ class Library implements InterfaceSearch{
     }
     }
 }
+
 
 
 
