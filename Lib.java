@@ -435,7 +435,7 @@ class Library implements InterfaceSearch{
         List<Book> results = new ArrayList<>();
         // Search the map's values
         for (Book book : bookMap.values()) {
-            if (book.title.toLowerCase().contains(titleQuery.toLowerCase())) { //toLowerCase for case-insensitive search
+            if (book.getTitle().toLowerCase().contains(titleQuery.toLowerCase())) { //toLowerCase for case-insensitive search
                 results.add(book);
             }
         }
@@ -446,7 +446,7 @@ class Library implements InterfaceSearch{
     public List<Book> searchByGenre(Genre genre) {
         List<Book> results = new ArrayList<>();
         for (Book book : bookMap.values()) {
-            if (book.genre == genre) {
+            if (book.getGenre() == genre) {
                 results.add(book);
             }
         }
@@ -457,7 +457,7 @@ class Library implements InterfaceSearch{
     public List<Book> searchByAuthor(String authorQuery) {
         List<Book> results = new ArrayList<>();
         for (Book book : bookMap.values()) {
-            if (book.author.toLowerCase().contains(authorQuery.toLowerCase())) { //toLowerCase for case-insensitive search
+            if (book.getAuthor().toLowerCase().contains(authorQuery.toLowerCase())) { //toLowerCase for case-insensitive search
                 results.add(book);
             }
         }
@@ -467,7 +467,7 @@ class Library implements InterfaceSearch{
    //for borrowing the books
     public boolean borrowedBook(String bookID, String memberID, String librarianID, String rentDate, String dueDate){
         for (Book book : bookList ){
-            if (book.bookID.equals(bookID) && book.bookStatus == BookStatus.AVAILABLE && book.quantity >0){
+            if (book.getBookID().equals(bookID) && book.bookStatus == BookStatus.AVAILABLE && book.quantity >0){
                 book.quantity--;
                 if (book.quantity == 0){
                     book.bookStatus = BookStatus.BORROWED;
@@ -475,7 +475,7 @@ class Library implements InterfaceSearch{
                 String recordID = "Record" + (borrowHistory.size() + 1);
                 History record = new History(recordID, memberID, librarianID, bookID, rentDate, dueDate);
                 borrowHistory.add(record);
-                System.out.println(book.title + "borrowed by member " + memberID);
+                System.out.println(book.getTitle() + "borrowed by member " + memberID);
                 return true; 
             }
         }
@@ -511,6 +511,7 @@ class Library implements InterfaceSearch{
         String password = In.nextLine();
     }
 }
+
 
 
 
