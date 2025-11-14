@@ -217,6 +217,7 @@ class Member extends User{
             }
         }
     }
+    
     public void displayMemberMenu(Library system) {
         boolean loggedIn = true;
         while (loggedIn) {
@@ -468,12 +469,12 @@ class Library implements InterfaceSearch{
             System.out.print("Enter quantity to add: ");
             try {
                 int amount = In.nextInt();
-                In.nextLine(); // consume newline
+                In.nextLine();
                 existingBook.addQuantity(amount);
                 System.out.println("Stock updated. New quantity: " + existingBook.getQuantity());
             } catch (InputMismatchException e) {
                 System.out.println("Invalid number. No stock added.");
-                In.nextLine(); // clear bad input
+                In.nextLine(); 
             }
         } else {
             System.out.println("Adding new book...");
@@ -588,6 +589,7 @@ class Library implements InterfaceSearch{
         System.out.println("Successfuly returned book!");
         return true;
     }
+    
     // Registration Methods
     public static boolean isUsernameTaken(String username, List<Member> memberList, List<Librarian> librarianList) {
         for (Member m : memberList) {
@@ -720,6 +722,7 @@ class Library implements InterfaceSearch{
         }
     }
 }
+
 
 
 
